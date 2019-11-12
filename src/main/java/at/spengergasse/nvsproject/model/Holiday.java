@@ -5,8 +5,7 @@ import java.time.LocalDate;
 public class Holiday {
 
     private String name;
-    private String describtion;
+    private String description;
     private LocalDate date;
     private String type;
-
 }
