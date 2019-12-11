@@ -53,5 +53,20 @@ public class UserService {
                 .map(UserDto::new)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * @param id the id of the wanted user
+     * @return The user with the given id
+     */
+    public UserDto findById(Long id) {
+        return userRepository
+                .findById(id)
+                .map(UserDto::new)
+                .get();
+    }
+
+    public void deleteUserById(Long id){
+        userRepository.deleteById(id);
+    }
 }
 
