@@ -18,10 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class BasicConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+       auth.authenticationProvider(daoAuthenticationProvider());
     }
  
     @Override
@@ -37,14 +38,9 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setPasswordEncoder(passwordEncoder);
         authenticationProvider.setUserDetailsService(userDetailsService);
 
         return authenticationProvider;
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }

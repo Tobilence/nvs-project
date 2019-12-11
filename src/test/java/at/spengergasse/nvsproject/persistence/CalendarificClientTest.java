@@ -1,6 +1,6 @@
 package at.spengergasse.nvsproject.persistence;
 
-import at.spengergasse.nvsproject.service.dto.CalendarificResponseWrapper;
+import at.spengergasse.nvsproject.service.dto.restmodels.CalendarificResponseWrapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

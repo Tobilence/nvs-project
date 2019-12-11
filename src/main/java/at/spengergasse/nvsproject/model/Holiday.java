@@ -1,6 +1,6 @@
 package at.spengergasse.nvsproject.model;
 
-import at.spengergasse.nvsproject.service.dto.HolidayDto;
+import at.spengergasse.nvsproject.service.dto.restmodels.HolidayDto;
 
 import java.time.LocalDate;
 

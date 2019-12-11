@@ -1,5 +1,6 @@
 package at.spengergasse.nvsproject.model;
 
+import at.spengergasse.nvsproject.service.dto.EventDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,10 @@ public class Event extends AbstractPersistable<Long> {
     private int duration;
     @ManyToOne (cascade = CascadeType.PERSIST)
     private Calendar calendar;
+
+    public Event(EventDto eventDto){
+        this.name = eventDto.getName();
+        this.dateTime = eventDto.getDateTime();
+        this.duration = eventDto.getDuration();
+    }
 }

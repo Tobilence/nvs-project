@@ -1,4 +1,4 @@
-package at.spengergasse.nvsproject.service.dto;
+package at.spengergasse.nvsproject.service.dto.restmodels;
 
 import lombok.Getter;
 import lombok.Setter;

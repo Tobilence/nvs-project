@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://mysql-nvs-project/nvs_project
+    url: jdbc:mysql://mysql-database-nvs-project/nvs_project
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -11,6 +11,7 @@ spring:
         show-sql: true
     hibernate:
       ddl-auto: none
+      use-new-id-generator-mappings: false
   security:
     user:
       name: admin
