@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * The Calendar Service
+ */
 @Service
 @RequiredArgsConstructor
 public class CalendarService {
@@ -18,6 +21,9 @@ public class CalendarService {
     private final CalendarRepository calendarRepository;
     private final UserRepository userRepository;
 
+    /**
+     * @return All the calendar objects that have the user with the given id mapped to Dto's
+     */
     public CalendarDto findCalendarForUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User with id: " + userId + " not found"));

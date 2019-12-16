@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * The Array that contains all the holidays
+ */
 @Getter
 @Setter
 public class CalendarificResponse {

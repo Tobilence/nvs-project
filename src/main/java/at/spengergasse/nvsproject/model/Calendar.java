@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The calendar model
+ * This model defines which data is saved for the calendar object - it is an exact replica of the calendar database table
+ */
 @Entity
 @Getter
 @NoArgsConstructor

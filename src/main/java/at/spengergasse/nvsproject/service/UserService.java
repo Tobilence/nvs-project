@@ -1,10 +1,12 @@
 package at.spengergasse.nvsproject.service;
 
+import at.spengergasse.nvsproject.exception.AuthenticationException;
 import at.spengergasse.nvsproject.exception.PersistenceException;
 import at.spengergasse.nvsproject.model.User;
 import at.spengergasse.nvsproject.persistence.UserRepository;
 import at.spengergasse.nvsproject.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The User Service
+ * This class is responsible for all the logic involving user objects
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -43,6 +49,18 @@ public class UserService {
                 .get();
     }
 
+    public UserDto checkCredentials(UserDto userDto) throws AuthenticationException{
+         User expectedUser = userRepository.findByUsername(userDto.getUsername())
+                 .orElseThrow(() -> new AuthenticationException("Username not found " + userDto.getUsername()));
+
+         if(passwordEncoder.matches(userDto.getPassword(), expectedUser.getPassword())){
+             return Optional.of(expectedUser).map(UserDto::new).get();
+         }
+         else {
+             throw new AuthenticationException("The username and password don't match");
+         }
+    }
+
     /**
      * @return All users (mapped to UserDto's) from the Database.
      */
@@ -65,8 +83,13 @@ public class UserService {
                 .get();
     }
 
+    /**
+     * Deletes the user with the given id
+     * @param id the id of the user that should be deleted
+     */
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
     }
 }
+
 

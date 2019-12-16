@@ -1,9 +1,15 @@
 package at.spengergasse.nvsproject.model;
 
 import at.spengergasse.nvsproject.service.dto.restmodels.HolidayDto;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
+/**
+ * The Holiday model
+ * This model defines which data obtained by the Calendariffic Api
+ */
+@Getter
 public class Holiday {
 
     private String name;

@@ -9,9 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * This class contains the Basic Security Configuration
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -20,21 +22,36 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Tells the Application how the authentication should be done
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        auth.authenticationProvider(daoAuthenticationProvider());
     }
- 
+
+    /**
+     * Tells the Application which Routes should need authorization
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
           .authorizeRequests()
+                .antMatchers("/authentication")
+                .permitAll()
           .anyRequest()
-          .authenticated()
+          .permitAll() //TODO change to authenticated() later
           .and()
-          .httpBasic();
+            .httpBasic()
+          .and()
+            .csrf()
+            .disable();
+
     }
 
+    /**
+     * Creates the authentication provider if one is needed
+     */
     @Bean
     DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();

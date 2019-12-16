@@ -9,13 +9,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * The Event Controller
+ * This class defines all the available url's that involve event objects
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping (path = "/events")
+@CrossOrigin
 public class EventController {
 
     private final EventService eventService;
 
+    /**
+     * @return the event with the given id
+     */
     @GetMapping (path = "/{id}")
     public ResponseEntity<EventDto> findEventById(@PathVariable Long id){
         return ResponseEntity.ok(
@@ -23,6 +31,9 @@ public class EventController {
         );
     }
 
+    /**
+     * @return all events in the database
+     */
     @GetMapping
     public ResponseEntity<List<EventDto>> findAllEvents(){
         return ResponseEntity.ok(
@@ -30,6 +41,11 @@ public class EventController {
         );
     }
 
+    /**
+     * Saves (insert if no id is provided, update if there already is an event object with that id) an event object
+     * @param eventDto The event object that should be saved
+     * @return the new event object (with the exact attributes is currently has in the database)
+     */
     @PostMapping
     public ResponseEntity<EventDto> saveEvent(@RequestBody EventDto eventDto){
         return ResponseEntity.ok(
@@ -38,6 +54,10 @@ public class EventController {
         );
     }
 
+    /**
+     * Deletes an event
+     * @param id the id of the event that should be deleted
+     */
     @DeleteMapping (path = "/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id){
         eventService.deleteEventById(id);

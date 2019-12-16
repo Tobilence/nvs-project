@@ -9,6 +9,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 import java.util.Optional;
 
+/**
+ * The user model
+ * This model defines which data is saved for the user object - it is an exact replica of the user database table
+ */
 @Entity
 @Getter
 @NoArgsConstructor
