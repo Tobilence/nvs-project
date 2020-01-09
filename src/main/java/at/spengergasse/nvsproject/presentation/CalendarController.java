@@ -29,5 +29,4 @@ public class CalendarController {
     public ResponseEntity<CalendarDto> findCalendarForUser(@RequestParam (name = "userId") Long userId) {
         return ResponseEntity.ok(calendarService.findCalendarForUserId(userId));
     }
-
 }

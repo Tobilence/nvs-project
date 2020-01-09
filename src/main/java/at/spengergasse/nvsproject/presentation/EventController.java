@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -63,4 +65,47 @@ public class EventController {
         eventService.deleteEventById(id);
         return ResponseEntity.status(200).build();
     }
+
+    @GetMapping (params = {"calendarId"})
+    public ResponseEntity<List<EventDto>> findEventsForCalendar(@RequestParam Long calendarId){
+        return ResponseEntity.ok(eventService.findForCalendar(calendarId));
+    }
+
+    @PostMapping (path = "/{id}")
+    public ResponseEntity<EventDto> updateEventDetails(@PathVariable Long id, @RequestBody String details) {
+        return ResponseEntity.ok(eventService.updateDetails(id, details));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

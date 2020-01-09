@@ -1,12 +1,11 @@
 package at.spengergasse.nvsproject.presentation;
 
-import at.spengergasse.nvsproject.service.dto.restmodels.HolidayDto;
+import at.spengergasse.nvsproject.service.HolidayService;
+import at.spengergasse.nvsproject.service.dto.PreparedHoliday;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,10 @@ import java.util.List;
 @CrossOrigin
 public class HolidayController {
 
+    private final HolidayService holidayService;
 
+    @GetMapping (path = "/{countryCode}")
+    public ResponseEntity<List<PreparedHoliday>> getHolidaysByCountryCode(@PathVariable String countryCode){
+        return ResponseEntity.ok(holidayService.getHolidaysForCountryCode(countryCode));
+    }
 }

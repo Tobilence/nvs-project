@@ -48,6 +48,13 @@ public class UserController {
     }
 
     /**
+     * registers a user
+     * @param userDto the arguments of the user object that should be saved
+     * @return the new user object
+     */
+
+
+    /**
      * @param id the id of the user object that should be deleted
      */
     @DeleteMapping (path = "/{id}")

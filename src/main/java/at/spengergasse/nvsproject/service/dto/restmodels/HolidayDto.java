@@ -1,6 +1,5 @@
 package at.spengergasse.nvsproject.service.dto.restmodels;
 
-import at.spengergasse.nvsproject.model.Holiday;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -4,11 +4,11 @@ import at.spengergasse.nvsproject.service.dto.EventDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The event model
@@ -25,18 +25,16 @@ public class Event extends AbstractPersistable<Long> {
     private String name;
     @Column (name = "description")
     private String description;
-    @Column (name = "start_date_time")
-    private LocalDateTime startDateTime;
-    @Column (name = "end_date_time")
-    private LocalDateTime endDateTime;
+    @Column (name = "date")
+    private LocalDate date;
     @ManyToOne (cascade = CascadeType.MERGE)
     private Calendar calendar;
 
     public Event(EventDto eventDto){
+        setId(eventDto.getId());
         this.name = eventDto.getName();
-        this.description = eventDto.getDescription();
-        this.startDateTime = eventDto.getStartDateTime();
-        this.endDateTime = eventDto.getEndDateTime();
+        this.description = eventDto.getDetails();
+        this.date = LocalDate.parse(eventDto.getStart(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.calendar = eventDto.getCalendar();
     }
 }

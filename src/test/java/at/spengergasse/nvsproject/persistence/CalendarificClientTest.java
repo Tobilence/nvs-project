@@ -17,7 +17,7 @@ public class CalendarificClientTest {
     private HolidayClient holidayClient;
     @Autowired
     private EventRepository eventRepository;
-/*
+
     @Test
     public void spike(){
         CalendarificResponseWrapper calendarificResponseWrapper = holidayClient.getAllHolidays(
@@ -26,5 +26,4 @@ public class CalendarificClientTest {
                 2019);
         assertNotNull(calendarificResponseWrapper.getResponse());
     }
- */
 }

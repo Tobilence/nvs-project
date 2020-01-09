@@ -2,8 +2,10 @@ package at.spengergasse.nvsproject.service;
 
 import at.spengergasse.nvsproject.exception.AuthenticationException;
 import at.spengergasse.nvsproject.exception.PersistenceException;
+import at.spengergasse.nvsproject.model.Calendar;
 import at.spengergasse.nvsproject.model.User;
 import at.spengergasse.nvsproject.persistence.UserRepository;
+import at.spengergasse.nvsproject.service.dto.CalendarDto;
 import at.spengergasse.nvsproject.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,14 +35,17 @@ public class UserService {
      * @return A new UserDto. This UserDto also has an id (since the Database gave it one)
      */
     public UserDto saveUser(UserDto userDto){
-        userRepository.findByUsername(userDto.getUsername())
-                .orElseThrow(() -> new PersistenceException("This Username already exists: " + userDto.getUsername()));
+        if(userRepository.findByUsername(userDto.getUsername()).isPresent())
+            throw new PersistenceException("This Username already exists: " + userDto.getUsername());
 
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        if(userDto.getCalendar() == null) {
+            userDto.setCalendar(new CalendarDto());
+        }
+
         User user = Optional.of(userDto)
                 .map(User::new)
                 .get();
-
 
         return Optional.of(
                     userRepository.save(user)

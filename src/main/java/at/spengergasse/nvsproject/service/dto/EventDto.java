@@ -5,7 +5,8 @@ import at.spengergasse.nvsproject.model.Event;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Data Transfer Object of the event model
@@ -18,11 +19,10 @@ public class EventDto {
 
     private Long id;
     private String name;
-    private String description;
+    private String details;
     @JsonProperty (access = JsonProperty.Access.WRITE_ONLY)
     private Calendar calendar;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private String start;
 
     /**
      * Initializes the dto with the data of the given event
@@ -30,8 +30,7 @@ public class EventDto {
     public EventDto(Event event){
         this.id = event.getId();
         this.name = event.getName();
-        this.description = event.getDescription();
-        this.startDateTime = event.getStartDateTime();
-        this.endDateTime = event.getEndDateTime();
+        this.details = event.getDescription();
+        this.start = event.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

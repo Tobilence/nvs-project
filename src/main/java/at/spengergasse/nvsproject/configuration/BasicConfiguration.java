@@ -50,7 +50,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Creates the authentication provider if one is needed
+     * Creates the authentication provider
      */
     @Bean
     DaoAuthenticationProvider daoAuthenticationProvider(){
