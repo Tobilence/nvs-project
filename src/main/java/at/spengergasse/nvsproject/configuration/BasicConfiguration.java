@@ -40,7 +40,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authentication")
                 .permitAll()
           .anyRequest()
-          .permitAll() //TODO change to authenticated() later
+          .permitAll()
           .and()
             .httpBasic()
           .and()

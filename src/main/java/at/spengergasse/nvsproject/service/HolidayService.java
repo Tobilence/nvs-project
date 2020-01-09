@@ -34,6 +34,7 @@ public class HolidayService {
                 .getResponse()
                 .getHolidays()
                 .stream()
+                .filter((holiday) -> holiday.getType().contains("National holiday"))
                 .map(PreparedHoliday::new)
                 .collect(Collectors.toList()); //add filter for type (holiday dto)
     }

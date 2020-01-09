@@ -38,6 +38,10 @@ public class UserService {
         if(userRepository.findByUsername(userDto.getUsername()).isPresent())
             throw new PersistenceException("This Username already exists: " + userDto.getUsername());
 
+        if(userDto.getPassword().length() < 8) {
+            throw new PersistenceException("The password needs to be at least 8 characters long");
+        }
+
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         if(userDto.getCalendar() == null) {
             userDto.setCalendar(new CalendarDto());
